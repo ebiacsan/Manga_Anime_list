@@ -12,7 +12,7 @@ public class Anime extends Obra {
 //    String estudio;
 //    String direcao;
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     public void cadastrar(){
 
     }
