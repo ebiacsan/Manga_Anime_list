@@ -1,6 +1,6 @@
 package com.animangalist.main.dto.request;
 
-import com.animangalist.main.ObraEntity;
+import com.animangalist.main.entity.ObraEntity;
 
 public class MangaDataRequestDTO {
     private Long mangaId;

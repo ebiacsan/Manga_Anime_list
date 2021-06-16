@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MangaService {
@@ -20,20 +21,19 @@ public class MangaService {
         if (dataDTO == null) throw new Exception();
         MangaEntity manga = new MangaEntity();
         manga.setId(dataDTO.getMangaId());
-        manga.setObra(dataDTO.getObra());
         manga.setMangakas(dataDTO.getMangakas());
         manga.setCapitulos(dataDTO.getCapitulos());
 
         mangaRepository.save(manga);
     }
 
-    public MangaListResponseDTO mangaList() throws Exception {
-        List<MangaResponseDTO> manga = mangaRepository.findAllManga();
-        if (manga == null) throw new Exception();
-        OrdemAlfabetica(manga);
-
-        return new MangaListResponseDTO(manga);
-    }
+//    public MangaListResponseDTO mangaList() throws Exception {
+//        List<MangaResponseDTO> manga = mangaRepository.findAllManga();
+//        if (manga == null) throw new Exception();
+//        OrdemAlfabetica(manga);
+//
+//        return new MangaListResponseDTO(manga);
+//    }
 
     public void dataUpdate(MangaDataRequestDTO dataDTO) throws Exception {
         MangaEntity manga = mangaRepository.findById(dataDTO.getMangaId())
@@ -48,15 +48,11 @@ public class MangaService {
         mangaRepository.delete(manga);
     }
 
-    private List<MangaResponseDTO> OrdemAlfabetica(List<MangaResponseDTO> manga) {
-        manga.sort(new Comparator<MangaResponseDTO>() {     //nao sei se esse metodo de ordenar funciona
-            @Override
-            public int compare(MangaResponseDTO o1, MangaResponseDTO o2) {
-                return o1.getObra().getTitulo().compareTo(o2.getObra().getTitulo());
-            }
-        });
-
-        return manga;
+    private List<MangaResponseDTO> ordemAlfabetica(List<MangaResponseDTO> manga) {
+        return  manga
+                .stream()
+                .sorted(Comparator.comparing((o) -> o.getObra().getTitulo()))
+                .collect(Collectors.toList());
     }
 
 
@@ -64,7 +60,6 @@ public class MangaService {
         manga.setId(dataDTO.getMangaId());
         manga.setCapitulos(dataDTO.getCapitulos());
         manga.setMangakas(dataDTO.getMangakas());
-        manga.setObra(dataDTO.getObra());
 
         mangaRepository.save(manga);
     }

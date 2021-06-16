@@ -1,6 +1,6 @@
 package com.animangalist.main.dto.response;
 
-import com.animangalist.main.controller.Anime;
+import com.animangalist.main.controller.AnimeController;
 import com.animangalist.main.entity.AnimeEntity;
 
 import java.util.List;

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/manga")
-public class Manga{
+public class MangaController {
     //TODO Mudar nome da classe para MangaController
 
     @Autowired
@@ -25,10 +25,10 @@ public class Manga{
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/buscar")
-    public ResponseEntity<MangaListResponseDTO> buscar() throws Exception { //buscando todos os animes e já retorna em ordem alfabeteica
-        return ResponseEntity.ok(mangaService.mangaList());
-    }
+//    @GetMapping("/buscar")
+//    public ResponseEntity<MangaListResponseDTO> buscar() throws Exception { //buscando todos os animes e já retorna em ordem alfabeteica
+//        return ResponseEntity.ok(mangaService.mangaList());
+//    }
 
     @PutMapping("/update")
     public ResponseEntity<?> alterarDados(@RequestBody MangaDataRequestDTO dataDTO) throws Exception {

@@ -1,6 +1,6 @@
 package com.animangalist.main.dto.response;
 
-import com.animangalist.main.ObraEntity;
+import com.animangalist.main.entity.ObraEntity;
 
 public class MangaResponseDTO {
     //TODO acho que tem que fazer um joincollum pra pegar as coisas das obras

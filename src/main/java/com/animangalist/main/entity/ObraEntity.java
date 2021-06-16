@@ -1,4 +1,4 @@
-package com.animangalist.main;
+package com.animangalist.main.entity;
 
 import com.animangalist.main.types.GenreTypes;
 import com.animangalist.main.types.ObraTypes;
@@ -13,7 +13,6 @@ public class ObraEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID_OBRA")
-    //open var id : Long? = null;
     private Long id;
 
     @Column(name = "GENERO")

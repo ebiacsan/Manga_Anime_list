@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/anime")
-public class Anime{
+public class AnimeController {
 //TODO Mudar nome da classe para AnimeController
 
     @Autowired
@@ -29,35 +29,35 @@ public class Anime{
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}") //é anime/id ou anime/{id}?? se vc quiser que ele passe na url vai ser {id}
-    public ResponseEntity<AnimeResposneDTO> buscarPorId(@PathVariable Long id) throws Exception {
-        return ResponseEntity.ok(animeService.animeById(id));
-    }
+//    @GetMapping("/{id}") //é anime/id ou anime/{id}?? se vc quiser que ele passe na url vai ser {id}
+//    public ResponseEntity<AnimeResposneDTO> buscarPorId(@PathVariable Long id) throws Exception {
+//        return ResponseEntity.ok(animeService.animeById(id));
+//    }
 
-    @GetMapping("/ordem")
-    public ResponseEntity<AnimeListResponseDTO> buscarEmOrdemAlfa() throws Exception {
-        return ResponseEntity.ok(animeService.animeListAlphaOrder());
-    }
+//    @GetMapping("/ordem")
+//    public ResponseEntity<AnimeListResponseDTO> buscarEmOrdemAlfa() throws Exception {
+//        return ResponseEntity.ok(animeService.animeListAlphaOrder());
+//    }
 
-    @GetMapping("/genero/{genero}")
-    public ResponseEntity<AnimeListResponseDTO> buscarPorGenero(@PathVariable GenreTypes genero) throws Exception {
-        return ResponseEntity.ok(animeService.animeListByGenre(genero));
-    }
+//    @GetMapping("/genero/{genero}")
+////    public ResponseEntity<AnimeListResponseDTO> buscarPorGenero(@PathVariable GenreTypes genero) throws Exception {
+////        return ResponseEntity.ok(animeService.animeListByGenre(genero));
+////    }
 
-    @GetMapping("/status/{status}")
-    public ResponseEntity<AnimeListResponseDTO> buscarPorStatus(@PathVariable StatusTypes status) throws Exception {
-        return ResponseEntity.ok(animeService.animeListByStatus(status));
-    }
+//    @GetMapping("/status/{status}")
+//    public ResponseEntity<AnimeListResponseDTO> buscarPorStatus(@PathVariable StatusTypes status) throws Exception {
+//        return ResponseEntity.ok(animeService.animeListByStatus(status));
+//    }
 
-    @GetMapping("/Autor/{Autor}")
-    public ResponseEntity<AnimeListResponseDTO> buscarPorAutor(@PathVariable String autor) throws Exception {
-        return ResponseEntity.ok(animeService.animeListByAutor(autor));
-    }
+//    @GetMapping("/Autor/{Autor}")
+//    public ResponseEntity<AnimeListResponseDTO> buscarPorAutor(@PathVariable String autor) throws Exception {
+//        return ResponseEntity.ok(animeService.animeListByAutor(autor));
+//    }
 
-    @GetMapping("/ano/{ano}")
-    public ResponseEntity<AnimeListResponseDTO> buscarPorAno(@PathVariable Integer ano) throws Exception {
-        return ResponseEntity.ok(animeService.animeListByYear(ano));
-    }
+//    @GetMapping("/ano/{ano}")
+//    public ResponseEntity<AnimeListResponseDTO> buscarPorAno(@PathVariable Integer ano) throws Exception {
+//        return ResponseEntity.ok(animeService.animeListByYear(ano));
+//    }
 
     @PutMapping("/update")
     public ResponseEntity<?> alterarDados(@RequestBody AnimeDataRequestDTO dataDTO) throws Exception { //continua void pq nao tem a necessidade de retornar nada

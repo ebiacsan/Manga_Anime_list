@@ -1,11 +1,11 @@
 package com.animangalist.main.service;
 
+
 import com.animangalist.main.Repository.AnimeRepository;
 import com.animangalist.main.dto.request.AnimeDataRequestDTO;
 import com.animangalist.main.dto.response.AnimeListResponseDTO;
 import com.animangalist.main.dto.response.AnimeResposneDTO;
 import com.animangalist.main.entity.AnimeEntity;
-import com.animangalist.main.types.GenreTypes;
 import com.animangalist.main.types.StatusTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,6 @@ public class AnimeService {
         if (dataDTO == null) throw new Exception();
         AnimeEntity anime = new AnimeEntity();
         anime.setId(dataDTO.getAnimeId());
-        anime.setObra(dataDTO.getObra());
         anime.setDirecao(dataDTO.getDirecao());
         anime.setEstudio(dataDTO.getEstudio());
         anime.setQuantidadeEpisodios(dataDTO.getQuantidadeEpisodios());
@@ -32,59 +31,59 @@ public class AnimeService {
         animeRepository.save(anime);
     }
 
-    public AnimeResposneDTO animeById(Long id) throws Exception {
-        AnimeResposneDTO anime = animeRepository.findAnimeEntityById(id);
-        if (anime == null) throw new Exception();
+//    public AnimeResposneDTO animeById(Long id) throws Exception {
+//        AnimeResposneDTO anime = animeRepository.findAnimeEntityById(id);
+//        if (anime == null) throw new Exception();
+//
+//        return anime;
+//    }
 
-        return anime;
-    }
+//    public AnimeListResponseDTO animeListByGenre(GenreTypes genero) throws Exception {
+//        List<AnimeResposneDTO> anime = animeRepository.findByGenre(genero);
+//        //anime = anime.stream().filter(e -> e.getGenero().equals(genero)).collect(Collectors.toList()); se nao estiver filtrado por genero utilizar isso aqui
+//        if (anime == null) throw new Exception();
+//        OrdemAlfabetica(anime);
+//
+//        return new AnimeListResponseDTO(anime);
+//    }
 
-    public AnimeListResponseDTO animeListByGenre(GenreTypes genero) throws Exception {
-        List<AnimeResposneDTO> anime = animeRepository.findByGenre(genero);
-        //anime = anime.stream().filter(e -> e.getGenero().equals(genero)).collect(Collectors.toList()); se nao estiver filtrado por genero utilizar isso aqui
-        if (anime == null) throw new Exception();
-        OrdemAlfabetica(anime);
+//    public AnimeListResponseDTO animeListAlphaOrder() throws Exception {
+//        List<AnimeResposneDTO> anime = animeRepository.findAllAnime();
+//        if (anime == null) throw new Exception();
+//        OrdemAlfabetica(anime);
+//
+//        return new AnimeListResponseDTO(anime);
+//    }
 
-        return new AnimeListResponseDTO(anime);
-    }
+//    public AnimeListResponseDTO animeListByStatus(StatusTypes status) throws Exception {
+//        List<AnimeResposneDTO> anime = animeRepository.findAllAnime();
+//        if (anime == null) {
+//            throw new Exception();
+//        }
+//        anime = anime.stream().filter(e -> e.getObra().getStatus().equals(status)).collect(Collectors.toList()); //filtrando os animes pelo status fornecido
+//        OrdemAlfabetica(anime);
+//
+//        return new AnimeListResponseDTO(anime);
+//    }
 
-    public AnimeListResponseDTO animeListAlphaOrder() throws Exception {
-        List<AnimeResposneDTO> anime = animeRepository.findAllAnime();
-        if (anime == null) throw new Exception();
-        OrdemAlfabetica(anime);
-
-        return new AnimeListResponseDTO(anime);
-    }
-
-    public AnimeListResponseDTO animeListByStatus(StatusTypes status) throws Exception {
-        List<AnimeResposneDTO> anime = animeRepository.findAllAnime();
-        if (anime == null) {
-            throw new Exception();
-        }
-        anime = anime.stream().filter(e -> e.getObra().getStatus().equals(status)).collect(Collectors.toList()); //filtrando os animes pelo status fornecido
-        OrdemAlfabetica(anime);
-
-        return new AnimeListResponseDTO(anime);
-    }
-
-    public AnimeListResponseDTO animeListByAutor(String autor) throws Exception {
-        List<AnimeResposneDTO> anime = animeRepository.findAllAnime();
-        if (anime == null) throw new Exception();
-        anime = anime.stream().filter(e -> e.getObra().getAutor().equals(autor)).collect(Collectors.toList());
-        OrdemAlfabetica(anime);
-
-        return new AnimeListResponseDTO(anime);
-    }
+//    public AnimeListResponseDTO animeListByAutor(String autor) throws Exception {
+//        List<AnimeResposneDTO> anime = animeRepository.findAllAnime();
+//        if (anime == null) throw new Exception();
+//        anime = anime.stream().filter(e -> e.getObra().getAutor().equals(autor)).collect(Collectors.toList());
+//        OrdemAlfabetica(anime);
+//
+//        return new AnimeListResponseDTO(anime);
+//    }
 
 
-    public AnimeListResponseDTO animeListByYear(Integer ano) throws Exception {
-        List<AnimeResposneDTO> anime = animeRepository.findAllAnime();
-        if (anime == null) throw new Exception();
-        anime = anime.stream().filter(e -> e.getObra().getLancamento().equals(ano)).collect(Collectors.toList());
-        OrdemAlfabetica(anime);
-
-        return new AnimeListResponseDTO(anime);
-    }
+//    public AnimeListResponseDTO animeListByYear(Integer ano) throws Exception {
+//        List<AnimeResposneDTO> anime = animeRepository.findAllAnime();
+//        if (anime == null) throw new Exception();
+//        anime = anime.stream().filter(e -> e.getObra().getLancamento().equals(ano)).collect(Collectors.toList());
+//        OrdemAlfabetica(anime);
+//
+//        return new AnimeListResponseDTO(anime);
+//    }
 
     public void dataUpdate(AnimeDataRequestDTO dataDTO) throws Exception {
         AnimeEntity anime = animeRepository.findById(dataDTO.getAnimeId())
@@ -115,7 +114,6 @@ public class AnimeService {
         anime.setDirecao(dataDTO.getDirecao());
         anime.setEstudio(dataDTO.getEstudio());
         anime.setQuantidadeEpisodios(dataDTO.getQuantidadeEpisodios());
-        anime.setObra(dataDTO.getObra());
 
         animeRepository.save(anime);
     }

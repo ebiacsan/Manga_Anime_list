@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface MangaRepository extends JpaRepository<MangaEntity, Long> {
-    List<MangaResponseDTO> findAllManga();
+    List<MangaEntity> findAll();
 }
