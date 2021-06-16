@@ -18,18 +18,18 @@ API de Recomendação de animes das 2 últimas décadas, com base em maiores cla
 
 | Método | URL                                   | Descrição                          |
 | ------ | ------------------------------------- | ---------------------------------- |
-| GET    | http://localhost:8080/anime           | Página home de animes              |
-| POST   | http://localhost:8080/anime/cadastrar | Lista de animes                    |
-| GET    | http://localhost:8080/anime/id        | Busca anime por ID                 |
-| GET    | http://localhost:8080/anime/ordem     | Busca animes em ordem alfabética   |
-| GET    | http://localhost:8080/anime/genero    | Busca animes por gênero            |
-| GET    | http://localhost:8080/anime/status    | Busca animes por status            |
-| GET    | http://localhost:8080/anime/Autor     | Busca animes por autor             |
-| GET    | http://localhost:8080/anime/ano       | Busca animes por ano de lançamento |
-| PUT    | http://localhost:8080/anime/{{id}}    | Alterar dados por ID               |
-| DELETE | http://localhost:8080/anime/{{id}}    | Deleta animes por ID               |
+| GET    | https://app-manganime-time.herokuapp.com/anime           | Página home de animes              |
+| POST   | https://app-manganime-time.herokuapp.com/anime/cadastrar | Lista de animes                    |
+| GET    | https://app-manganime-time.herokuapp.com/anime/id        | Busca anime por ID                 |
+| GET    | https://app-manganime-time.herokuapp.com/anime/ordem     | Busca animes em ordem alfabética   |
+| GET    | https://app-manganime-time.herokuapp.com/anime/genero    | Busca animes por gênero            |
+| GET    | https://app-manganime-time.herokuapp.com/anime/status    | Busca animes por status            |
+| GET    | https://app-manganime-time.herokuapp.com/anime/Autor     | Busca animes por autor             |
+| GET    | https://app-manganime-time.herokuapp.com/anime/ano       | Busca animes por ano de lançamento |
+| PUT    | https://app-manganime-time.herokuapp.com/anime/{{id}}    | Alterar dados por ID               |
+| DELETE | https://app-manganime-time.herokuapp.com/anime/{{id}}    | Deleta animes por ID               |
 |        |                                       |                                    |
-| GET    | http://localhost:8080/manga           | Página home de mangás              |
+| GET    | https://app-manganime-time.herokuapp.com/manga           | Página home de mangás              |
 |        |                                       |                                    |
 |        |                                       |                                    |
 |        |                                       |                                    |
