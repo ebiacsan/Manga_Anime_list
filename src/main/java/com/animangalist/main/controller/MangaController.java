@@ -3,7 +3,9 @@ package com.animangalist.main.controller;
 import com.animangalist.main.Obra;
 import com.animangalist.main.entity.MangaEntity;
 import com.animangalist.main.services.MangaService;
+import com.animangalist.main.types.GenreTypes;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,21 +24,41 @@ public class MangaController {
         return ResponseEntity.ok().build();
     }
 
-//    @GetMapping("/buscar")
-//    public ResponseEntity<MangaListResponseDTO> buscar() throws Exception { //buscando todos os animes e já retorna em ordem alfabeteica
-//        return ResponseEntity.ok(mangaService.mangaList());
-//    }
+    @GetMapping("/buscar")
+    public ResponseEntity<?> buscar() throws Exception { //buscando todos os animes e já retorna em ordem alfabeteica
+        return ResponseEntity.ok(mangaService.buscarTodosMangas());
+    }
 
-//    @PutMapping("/update")
-//    public ResponseEntity<?> alterarDados(@RequestBody MangaDataRequestDTO dataDTO) throws Exception {
-//        mangaService.dataUpdate(dataDTO);
-//        return ResponseEntity.ok().build();
-//    }
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<?> buscarPorId(@PathVariable Long id) throws Exception {
+        return ResponseEntity.ok(mangaService.buscarMangaPorId(id));
+    }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<?> remover(@PathVariable Long id) throws Exception {
-//        mangaService.delete(id);
-//        return ResponseEntity.ok().build();
-//    }
+    @GetMapping("/buscar/{genero}")
+    public ResponseEntity<?> buscarPorGenero(@PathVariable GenreTypes genero) throws Exception {
+        return ResponseEntity.ok(mangaService.buscarTodosPorGenero(genero));
+    }
 
+    @GetMapping("/buscar/ano/{ano}")
+    public ResponseEntity<?> buscarPorAno(@PathVariable Integer ano) throws Exception {
+        return ResponseEntity.ok(mangaService.buscarTodosPorAno(ano));
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> alterarDados(@RequestBody  MangaEntity manga, @PathVariable Long id) throws Exception {
+        mangaService.editarManga(manga, id);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remover(@PathVariable Long id) throws Exception {
+        mangaService.deletarMangaPorId(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/deletar")
+    public ResponseEntity<?> removerTudo() throws Exception {
+        mangaService.deletarTodos();
+        return ResponseEntity.ok().build();
+    }
 }
