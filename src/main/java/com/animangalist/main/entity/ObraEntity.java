@@ -28,7 +28,7 @@ public class ObraEntity {
     @NotBlank(message = "titulo é obrigatório")
     private String titulo;
 
-    @Column(name = "DESCRICAO")
+    @Column(name = "DESCRICAO", length = 1000)
     @NotBlank(message = "descrição é obrigatório")
     private String descricao;
 
