@@ -3,8 +3,12 @@ package com.animangalist.main.entity;
 import com.animangalist.main.types.GenreTypes;
 import com.animangalist.main.types.ObraTypes;
 import com.animangalist.main.types.StatusTypes;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -17,27 +21,33 @@ public class ObraEntity {
     private Long id;
 
     @Column(name = "GENERO")
+    @NotNull(message = "genero é obrigatório")
     private GenreTypes genero;
 
     @Column(name = "TITULO")
+    @NotBlank(message = "titulo é obrigatório")
     private String titulo;
 
     @Column(name = "DESCRICAO")
+    @NotBlank(message = "descrição é obrigatório")
     private String descricao;
 
     @Column(name = "STATUS")
+    @NotNull(message = "status é obrigatório")
     private StatusTypes status;
 
     @Column(name = "AUTOR")
+    @NotBlank(message = "autor é obrigatório")
     private String autor;
 
     @Column(name = "TIPO")
     private ObraTypes tipo;
 
     @Column(name = "LANCAMENTO")
-    private Integer lancamento;
+    private LocalDateTime lancamento;
 
-    @OneToMany(mappedBy = "obra")
+    @OneToMany(mappedBy = "obra", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<AvaliacaoEntity> avaliacoes;
 
     public List<AvaliacaoEntity> getAvaliacoes() {
@@ -104,12 +114,26 @@ public class ObraEntity {
         this.tipo = tipo;
     }
 
-    public Integer getLancamento() {
+    public LocalDateTime getLancamento() {
         return lancamento;
     }
 
-    public void setLancamento(Integer lancamento) {
+    public void setLancamento(LocalDateTime lancamento) {
         this.lancamento = lancamento;
     }
 
+    @PrePersist
+    @PreUpdate
+    public void prePersist() {
+
+        if(this.lancamento == null)
+            this.lancamento = LocalDateTime.now();
+
+        if(this instanceof AnimeEntity)
+            this.tipo = ObraTypes.ANIME;
+
+        if(this instanceof MangaEntity)
+            this.tipo = ObraTypes.MANGA;
+
+    }
 }

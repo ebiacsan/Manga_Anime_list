@@ -1,6 +1,10 @@
 package com.animangalist.main.entity;
 
+import com.animangalist.main.types.ObraTypes;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -13,6 +17,8 @@ public class MangaEntity extends ObraEntity implements Serializable {
     public String mangakas;
 
     @Column(name = "CAPITULOS")
+    @Min(value = 1, message = "a quantidade de capitulos deve ser maior ou igual a 1")
+    @NotNull(message = "quantidade de capítulos é obrigatório")
     private int capitulos;
 
     public String getMangakas() {

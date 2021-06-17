@@ -4,6 +4,8 @@ import com.animangalist.main.entity.ObraEntity;
 import com.animangalist.main.entity.UsuarioEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -25,6 +27,8 @@ public class AvaliacaoEntity {
     private ObraEntity obra;
 
     @Column(name = "NOTA_AVALIACAO")
+    @NotNull(message = "nota é obrigatório")
+    @Min(value = 0, message = "a nossa não pode ser inferior a 0")
     private Double nota;
 
     @Column(name = "DESCRICAO")

@@ -1,71 +1,79 @@
 package com.animangalist.main.controller;
 
-import com.animangalist.main.Obra;
 import com.animangalist.main.entity.AnimeEntity;
+import com.animangalist.main.entity.ObraEntity;
 import com.animangalist.main.services.AnimeService;
-import com.animangalist.main.types.GenreTypes;
-import com.animangalist.main.types.StatusTypes;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/anime")
-public class AnimeController {
-//TODO Mudar nome da classe para AnimeController
+public class AnimeController extends AbstractController{
 
     @Autowired
     private AnimeService animeService;
-//    int episodios;
-//    String estudio;
-//    String direcao;
 
     @PostMapping
     public ResponseEntity<?> cadastrar(@RequestBody AnimeEntity anime) throws Exception {
-        animeService.cadastrarAnime(anime);
-        return ResponseEntity.ok().build();
+        return buildResponse(() -> animeService.cadastrarAnime(anime));
     }
 
-//    @GetMapping("/{id}") //é anime/id ou anime/{id}?? se vc quiser que ele passe na url vai ser {id}
-//    public ResponseEntity<AnimeResposneDTO> buscarPorId(@PathVariable Long id) throws Exception {
-//        return ResponseEntity.ok(animeService.animeById(id));
-//    }
+    @GetMapping
+    public ResponseEntity buscarTodos() {
+        return buildResponse(() -> animeService.buscarTodosAnimes());
+    }
 
-//    @GetMapping("/ordem")
-//    public ResponseEntity<AnimeListResponseDTO> buscarEmOrdemAlfa() throws Exception {
-//        return ResponseEntity.ok(animeService.animeListAlphaOrder());
-//    }
+    @GetMapping("/ordem")
+    public ResponseEntity buscarEmOrdemAlfabetica() {
+        return buildResponse(() -> {
+                    return animeService.buscarTodosAnimes()
+                            .stream()
+                            .sorted(Comparator.comparing(ObraEntity::getTitulo))
+                            .collect(Collectors.toList());
+                }
+        );
+    }
 
-//    @GetMapping("/genero/{genero}")
-////    public ResponseEntity<AnimeListResponseDTO> buscarPorGenero(@PathVariable GenreTypes genero) throws Exception {
-////        return ResponseEntity.ok(animeService.animeListByGenre(genero));
-////    }
+    @GetMapping("/genero/{idGenero}")
+    public ResponseEntity buscarPorGenero(@PathVariable("idGenero") Integer idGenero) {
+        return buildResponse(() -> animeService.buscarPorGenero(idGenero));
+    }
 
-//    @GetMapping("/status/{status}")
-//    public ResponseEntity<AnimeListResponseDTO> buscarPorStatus(@PathVariable StatusTypes status) throws Exception {
-//        return ResponseEntity.ok(animeService.animeListByStatus(status));
-//    }
+    @GetMapping("/status/{idStatus}")
+    public ResponseEntity buscarPorStatus(@PathVariable("idStatus") Integer idStatus) {
+        return buildResponse(() -> animeService.buscarPorGenero(idStatus));
+    }
 
-//    @GetMapping("/Autor/{Autor}")
-//    public ResponseEntity<AnimeListResponseDTO> buscarPorAutor(@PathVariable String autor) throws Exception {
-//        return ResponseEntity.ok(animeService.animeListByAutor(autor));
-//    }
+    @GetMapping("/autor")
+    public ResponseEntity buscarPorNome(@RequestParam("nome") String nome) {
+        return buildResponse(() -> animeService.buscarPorAutor(nome));
+    }
 
-//    @GetMapping("/ano/{ano}")
-//    public ResponseEntity<AnimeListResponseDTO> buscarPorAno(@PathVariable Integer ano) throws Exception {
-//        return ResponseEntity.ok(animeService.animeListByYear(ano));
-//    }
+    @GetMapping("/lancamento")
+    public ResponseEntity buscarPorAno(@RequestParam("ano") Integer ano) {
+        return buildResponse(() -> animeService.buscarPorAnoDePublicacao(ano == null ? LocalDate.now().getYear() : ano));
+    }
 
-//    @PutMapping("/update")
-//    public ResponseEntity<?> alterarDados(@RequestBody AnimeDataRequestDTO dataDTO) throws Exception { //continua void pq nao tem a necessidade de retornar nada
-//        animeService.dataUpdate(dataDTO);
-//        return ResponseEntity.ok().build();
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity buscarPorId(@PathVariable("id") Long id) {
+        return buildResponse(() -> animeService.buscarAnimePorId(id));
+    }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<?> remover(@PathVariable Long id) throws Exception {
-//        animeService.delete(id);
-//        return ResponseEntity.ok().build();
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity atualizarDadosPorId(@PathVariable("id") Long id, @RequestBody AnimeEntity anime) {
+        return buildResponse(() -> animeService.editarAnime(anime, id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletarPorId(@PathVariable("id") Long id) {
+        return buildResponse(() -> animeService.deletarAnimePorId(id));
+    }
+
 }

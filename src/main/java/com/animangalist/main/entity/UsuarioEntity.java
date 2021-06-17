@@ -1,6 +1,9 @@
 package com.animangalist.main.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 
@@ -14,15 +17,19 @@ public class UsuarioEntity {
     private Long id;
 
     @Column(name = "USERNAME")
+    @NotBlank(message = "username é obrigatório")
     private String username;
 
     @Column(name = "NAME_USUARIO")
+    @NotBlank(message = "nome é obrigatorio")
     private String name;
 
     @Column(name = "EMAIL_USUARIO")
+    @NotBlank(message = "email é obrigatório")
     private String email;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<AvaliacaoEntity> avaliacoes;
 
     public List<AvaliacaoEntity> getAvaliacoes() {

@@ -5,6 +5,7 @@ import com.animangalist.main.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Service
@@ -13,20 +14,20 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public void criarUsuario(UsuarioEntity user){
+    public void criarUsuario( @Valid UsuarioEntity user){
         this.usuarioRepository.save(user);
     }
 
     public UsuarioEntity buscarUsuarioPorId(Long id) throws Exception {
-       return this.usuarioRepository.findById(id)
-               .orElseThrow(() -> new Exception("Não foi possível encontrar usuário por ID"));
+        return this.usuarioRepository.findById(id)
+                .orElseThrow(() -> new Exception("Não foi possível encontrar usuário por ID"));
     }
 
     public void deletarUsuarioPorId(Long id){
         this.usuarioRepository.deleteById(id);
     }
 
-    public void editarUsuario(UsuarioEntity usuarioNovo, Long id) throws Exception {
+    public void editarUsuario( @Valid UsuarioEntity usuarioNovo, Long id) throws Exception {
         UsuarioEntity dadosAntigos = this.buscarUsuarioPorId(id);
         dadosAntigos.setEmail(usuarioNovo.getEmail());
         dadosAntigos.setName(usuarioNovo.getName());
