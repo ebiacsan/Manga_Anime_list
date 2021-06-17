@@ -11,6 +11,7 @@ API de Recomendação de animes das 2 últimas décadas, com base em maiores cla
 - Java 11 <br>
 - Spring Boot <br> 
 - JPA <br>
+- H2 Database <br>
 </b></h4>
 
 

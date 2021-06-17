@@ -23,7 +23,7 @@ public class AnimeController {
 //    String estudio;
 //    String direcao;
 
-    @PostMapping("/cadastrar")
+    @PostMapping
     public ResponseEntity<?> cadastrar(@RequestBody AnimeDataRequestDTO dataDTO) throws Exception {
         animeService.registration(dataDTO);
         return ResponseEntity.ok().build();

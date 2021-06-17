@@ -23,7 +23,6 @@ public class AnimeService {
     public void registration(AnimeDataRequestDTO dataDTO) throws Exception {
         if (dataDTO == null) throw new Exception();
         AnimeEntity anime = new AnimeEntity();
-        anime.setId(dataDTO.getAnimeId());
         anime.setDirecao(dataDTO.getDirecao());
         anime.setEstudio(dataDTO.getEstudio());
         anime.setQuantidadeEpisodios(dataDTO.getQuantidadeEpisodios());
