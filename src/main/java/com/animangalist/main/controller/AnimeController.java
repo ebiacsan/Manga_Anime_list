@@ -2,6 +2,7 @@ package com.animangalist.main.controller;
 
 import com.animangalist.main.Obra;
 import com.animangalist.main.entity.AnimeEntity;
+import com.animangalist.main.services.AnimeService;
 import com.animangalist.main.types.GenreTypes;
 import com.animangalist.main.types.StatusTypes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class AnimeController {
 
     @PostMapping
     public ResponseEntity<?> cadastrar(@RequestBody AnimeEntity anime) throws Exception {
-        animeService.registration(anime);
+        animeService.cadastrarAnime(anime);
         return ResponseEntity.ok().build();
     }
 
@@ -56,15 +57,15 @@ public class AnimeController {
 //        return ResponseEntity.ok(animeService.animeListByYear(ano));
 //    }
 
-    @PutMapping("/update")
-    public ResponseEntity<?> alterarDados(@RequestBody AnimeDataRequestDTO dataDTO) throws Exception { //continua void pq nao tem a necessidade de retornar nada
-        animeService.dataUpdate(dataDTO);
-        return ResponseEntity.ok().build();
-    }
+//    @PutMapping("/update")
+//    public ResponseEntity<?> alterarDados(@RequestBody AnimeDataRequestDTO dataDTO) throws Exception { //continua void pq nao tem a necessidade de retornar nada
+//        animeService.dataUpdate(dataDTO);
+//        return ResponseEntity.ok().build();
+//    }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> remover(@PathVariable Long id) throws Exception {
-        animeService.delete(id);
-        return ResponseEntity.ok().build();
-    }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<?> remover(@PathVariable Long id) throws Exception {
+//        animeService.delete(id);
+//        return ResponseEntity.ok().build();
+//    }
 }
