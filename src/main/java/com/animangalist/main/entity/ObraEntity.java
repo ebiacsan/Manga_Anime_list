@@ -5,6 +5,7 @@ import com.animangalist.main.types.ObraTypes;
 import com.animangalist.main.types.StatusTypes;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "TB_OBRA")
@@ -36,8 +37,16 @@ public class ObraEntity {
     @Column(name = "LANCAMENTO")
     private Integer lancamento;
 
-    @Column(name = "NOTA")
-    private Integer nota;
+    @OneToMany(mappedBy = "obra")
+    private List<AvaliacaoEntity> avaliacoes;
+
+    public List<AvaliacaoEntity> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<AvaliacaoEntity> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
 
     public Long getId() {
         return id;
@@ -103,11 +112,4 @@ public class ObraEntity {
         this.lancamento = lancamento;
     }
 
-    public Integer getNota() {
-        return nota;
-    }
-
-    public void setNota(Integer nota) {
-        this.nota = nota;
-    }
 }

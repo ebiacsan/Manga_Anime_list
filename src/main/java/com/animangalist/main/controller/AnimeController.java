@@ -1,10 +1,7 @@
 package com.animangalist.main.controller;
 
 import com.animangalist.main.Obra;
-import com.animangalist.main.dto.request.AnimeDataRequestDTO;
-import com.animangalist.main.dto.response.AnimeListResponseDTO;
-import com.animangalist.main.dto.response.AnimeResposneDTO;
-import com.animangalist.main.service.AnimeService;
+import com.animangalist.main.entity.AnimeEntity;
 import com.animangalist.main.types.GenreTypes;
 import com.animangalist.main.types.StatusTypes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +21,8 @@ public class AnimeController {
 //    String direcao;
 
     @PostMapping
-    public ResponseEntity<?> cadastrar(@RequestBody AnimeDataRequestDTO dataDTO) throws Exception {
-        animeService.registration(dataDTO);
+    public ResponseEntity<?> cadastrar(@RequestBody AnimeEntity anime) throws Exception {
+        animeService.registration(anime);
         return ResponseEntity.ok().build();
     }
 
